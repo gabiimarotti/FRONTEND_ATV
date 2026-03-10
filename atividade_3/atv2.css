@@ -1,0 +1,162 @@
+body {
+    background-color:indianred;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+}
+
+h2{
+    color: rgb(162, 56, 56);
+    border-bottom: 2px solid rgb(162, 56, 56);
+    padding-bottom: 5px;
+    font-weight: 750;
+}
+
+h3 {
+    color: rgb(162, 56, 56);
+    font-weight: 700;
+    background-color: rgb(255, 231, 46);
+    padding: 2px;
+    margin: 10px auto;
+    max-width: 500px;
+}
+
+#pagina #topo, header {
+    background-color: rgb(255, 220, 220);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+#pagina #topo h1, header h1 {
+    font-family: Verdana, sans-serif;
+    text-align: center;
+    color: rgb(162, 56, 56);
+    padding-bottom: 15px;
+    border-bottom: 5px solid rgb(162, 56, 56);
+}
+
+#pagina #topo p, header p {
+    font-family: Verdana, sans-serif;
+    text-align: center;
+    color: rgb(162, 56, 56);
+}
+
+nav{
+    background-color: rgb(162, 54, 54);
+    padding: 10px;
+    margin: 10px auto;
+    text-align: center;
+    font-family: Verdana;
+    text-transform: uppercase;
+    font-weight: 700;
+    max-width: 1300px;
+    border-radius: 50px;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+nav li{
+    display: inline-block;
+    margin-right: 15px;
+    
+}
+
+nav ul a {
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgba(244, 204, 204, 0.995);
+    padding: 5px 10px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+   background-color: rgba(244, 204, 204, 0.995);
+   color: rgb(162, 54, 54); 
+   border-radius: 5px;
+}
+
+section {
+    margin: auto;
+    max-width: 1000px;
+    background-color: rgb(255, 220, 220);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+article{
+    background-color: rgb(255,240,240);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.2)
+}
+
+blockquote{
+    background-color: rgb(255,240,240);
+    border-left: 5px solid rgb(162, 56, 56);
+    padding: 10px;
+    font-style: italic;
+}
+
+#linha-do-tempo ol {
+    margin: 10px auto;
+    text-align: left;
+    font-family: Verdana;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px;
+    margin: 10px auto;
+}
+
+table th{
+    background-color: rgb(162, 56, 56);
+    color: white;
+    padding: 10px;
+    text-align: center;
+
+}
+
+table td {
+    background-color: rgb(162, 56, 56);
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+footer {
+    border-top: 2px solid rgb(255,240,240);
+    color: rgb(255,240,240);
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    margin-top: 30px;
+    padding-top: 15px;
+}
+
+#form, #formulario {
+    border: 3px dashed rgb(120, 40, 40);
+}
+
+#formulario-secreto{
+    background-color: rgb(120, 40, 40);
+    color: white;
+    border: 3px dashed white;
+}
+
+#formulario-secreto h2, #formulario-secreto fieldset legend{
+    color: white;
+}
+
+legend{
+    font-weight: bold;
+    color: rgb(162,56,56);
+    padding: 5px 10px;
+}

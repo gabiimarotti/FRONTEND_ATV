@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portas Lógicas</title>
+
+    <style>
+        body {
+    	  font-family: Verdana, sans-serif;
+          background-color:rgb(246, 163, 121);
+    	}
+
+	.header {
+    	background-color: #9a3412;
+    	color: white;
+        text-align: center;
+        padding: 3px;
+        max-width: 1000px;
+        margin: 10px auto;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.1)
+	}
+
+    .header h1 {
+        font-size: 40px;
+    }
+
+        nav {
+          background-color: #ea580c;
+          text-align: center;
+          padding: 12px;
+          font-family: Verdana, sans-serif;
+          max-width: 1000px;
+          margin:auto;
+          box-shadow: 0px 5px 15px rgba(0,0,0,0.1)
+        }
+
+       nav a {
+    	  color: white;
+          text-decoration: none;
+    	  margin: 0 15px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          transition: 0.3s;
+          width: 100px;
+          
+	}
+
+       nav a:hover {
+          background-color: white;
+          color: #ea580c;
+        }
+
+       #main {
+          width: 75%;
+          margin: auto;
+          padding: 20px;
+       }
+
+       section {
+          background-color: white;
+          margin-bottom: 25px;
+          padding: 15px;
+          border-radius: 10px;
+          box-shadow: 0px 5px 15px rgba(0,0,0,0.1)
+       }
+
+       section h3 {
+          text-align: center;
+          color: #9a3412;
+       }
+
+       section h4 {
+          text-align: center;
+       }
+
+       img {
+          display: block;
+          margin: 15px auto;
+       }
+
+       table {
+          margin: auto;
+          border-collapse: collapse;
+          background-color: bisque;
+          color:rgb(86, 49, 12);
+       }
+
+       table, th, td {
+         border: 3px solid #9a3412;
+         padding: 6px;
+         text-align: center;
+       }
+
+       form {
+         width: 55%;
+         margin: 10px auto;
+         background-color: bisque;
+         padding: 15px;
+         border: 3px dashed #9a3412;
+       }
+
+       input, textarea {
+         width: 98%;
+         padding: 5px;
+         margin-top: 5px;
+         margin-bottom: 10px;
+       }
+
+       input[type="radio"] {
+         width: auto;
+       }
+
+       footer {
+         text-align: center;
+         padding: 15px;
+         background-color: #9a3412;
+         color: white;
+         margin-top: 20px;
+       }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>PORTAS LÓGICAS</h1>
+    <h4>Conteúdo do 1º Semestre de Esoft</h4>
+</div>
+
+<nav>
+    <a href="#not">NOT</a>		
+    <a href="#and">AND</a>
+    <a href="#or">OR</a>
+    <a href="#nor">NOR</a>
+    <a href="#nand">NAND</a>
+</nav>
+
+<div id="main">
+
+    <section id="not">
+        <h3>PORTA LÓGICA NOT</h3>
+        <img src="imagens_atv/not.png" alt="Porta NOT" width="300">
+
+        <p>
+        A porta lógica NOT, também chamada de inversora, realiza a operação de negação lógica.
+        Ela possui apenas uma entrada e uma saída. Sua principal função é inverter o valor recebido.
+        Se a entrada for 1 (verdadeiro), a saída será 0 (falso). Se a entrada for 0, a saída será 1.
+        </p>
+
+        <p>
+        Na álgebra booleana, essa operação é representada por A̅ ou ¬A.
+        Isso significa que o valor lógico é sempre invertido.
+        </p>
+
+        <p>
+        A porta NOT é fundamental em circuitos digitais,
+        pois permite controlar ativações e desativações de sinais.
+        Ela é utilizada em sistemas eletrônicos, computadores e dispositivos digitais.
+        </p>
+
+        <h4>Tabela Verdade</h4>
+        <table>
+            <tr><th>A</th><th>Saída</th></tr>
+            <tr><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>0</td></tr>
+        </table>
+    </section>
+
+    <section id="and">
+        <h3>PORTA LÓGICA AND</h3>
+        <img src="imagens_atv/and.png" alt="Porta AND" width="300">
+
+        <p>
+        A porta lógica AND realiza a operação de multiplicação lógica.
+        Ela possui duas ou mais entradas e uma saída.
+        O resultado será 1 somente quando todas as entradas forem 1.
+        Se pelo menos uma entrada for 0, a saída será 0.
+        </p>
+
+        <p>
+        Na álgebra booleana, é representada por A · B.
+        Seu funcionamento é semelhante à multiplicação:
+        1 · 1 = 1, qualquer outra combinação resulta em 0.
+        </p>
+
+        <p>
+        Essa porta é muito utilizada em sistemas de segurança e controle,
+        onde duas condições precisam ser verdadeiras ao mesmo tempo
+        para que algo aconteça.
+        </p>
+
+        <h4>Tabela Verdade</h4>
+        <table>
+            <tr><th>A</th><th>B</th><th>Saída</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td></tr>
+        </table>
+    </section>
+
+    <section id="or">
+        <h3>PORTA LÓGICA OR</h3>
+        <img src="imagens_atv/or.png" alt="Porta OR" width="300">
+
+        <p>
+        A porta lógica OR realiza a operação de soma lógica.
+        A saída será 1 quando pelo menos uma das entradas for 1.
+        Ela só retorna 0 quando todas as entradas forem 0.
+        </p>
+
+        <p>
+        Na álgebra booleana, é representada por A + B.
+        Diferente da soma matemática comum, 1 + 1 continua sendo 1 na lógica digital.
+        </p>
+
+        <p>
+        A porta OR é utilizada quando se deseja que um sistema funcione
+        caso qualquer uma das condições seja verdadeira.
+        </p>
+    </section>
+
+    <section id="nor">
+        <h3>PORTA LÓGICA NOR</h3>
+        <img src="imagens_atv/nor.png" alt="Porta NOR" width="350">
+
+        <p>
+        A porta NOR é a negação da porta OR.
+        Ela combina a operação OR seguida de uma inversão lógica.
+        A saída será 1 apenas quando todas as entradas forem 0.
+        </p>
+
+        <p>
+        Na álgebra booleana, é representada como (A + B)̅.
+        </p>
+
+        <p>
+        Assim como a NAND, a NOR é considerada uma porta universal,
+        pois pode ser usada para construir qualquer outro tipo de porta lógica.
+        </p>
+    </section>
+
+    <section id="nand">
+        <h3>PORTA LÓGICA NAND</h3>
+        <img src="imagens_atv/nand.png" alt="Porta NAND" width="350">
+
+        <p>
+        A porta NAND é a negação da porta AND.
+        Sua saída será 0 somente quando todas as entradas forem 1.
+        Em qualquer outra situação, a saída será 1.
+        </p>
+
+        <p>
+        Na álgebra booleana, é representada como (A · B)̅.
+        </p>
+
+        <p>
+        A NAND é extremamente importante na eletrônica digital,
+        pois também é considerada uma porta universal,
+        sendo possível construir qualquer circuito lógico usando apenas NAND.
+        </p>
+    </section>
+
+</div>
+
+	
+<form>
+    <fieldset>
+        <legend>Avaliação sobre Portas Lógicas</legend>
+
+        <label for="nome">Nome do aluno:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label>Qual porta lógica realiza a operação de soma lógica?</label><br>
+        <input type="radio" name="porta_soma" value="AND"> AND<br>
+        <input type="radio" name="porta_soma" value="OR"> OR<br>
+        <input type="radio" name="porta_soma" value="NOT"> NOT<br><br>
+
+        <label>Explique com suas palavras o que é uma porta lógica:</label><br>
+        <textarea name="conceito" rows="5" cols="40"></textarea><br><br>
+
+        <input type="submit" value="Enviar Respostas">
+        <input type="reset" value="Limpar">
+    </fieldset>
+</form>
+
+<footer>
+    Desenvolvido por Gabriela Marotti
+</footer>
+
+</body>
+</html>

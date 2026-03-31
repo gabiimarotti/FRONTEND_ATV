@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade 6</title>
+
+    <style>
+        body{
+            background-image:url('lugarFeliz.png');
+            background-size: cover;
+        }
+        
+        #topo{
+            text-align: center;
+            color: #a00f44;
+            font-family: Verdana;
+            background-color: rgba(255, 255, 255, 0.632);
+            border-radius: 70px;
+            border: 2px solid #a00f44;
+        }
+
+        h1 {
+            font-weight:700;
+            padding: auto;
+        }
+
+        p{
+            padding:0%
+        }
+
+        .container{
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #btn:hover{
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="topo">
+        <h1>Julius está com fome!</h1>
+        <p>Rápido, alimente-o antes que ele fique uma FERA!</p>
+    </div>
+
+    <div class="container">
+        <img id="bicho" src="bolacha.png" width="400px">
+        <img id="btn" src="button.png" width="300px" onclick="alimentar()">
+    </div>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>

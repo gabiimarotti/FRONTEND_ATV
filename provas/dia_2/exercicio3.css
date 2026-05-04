@@ -1,0 +1,35 @@
+body{
+    font-family: Verdana;
+    background-color: #518aab;
+}
+
+h1, h2{
+    text-align: center;
+    margin: 20px;
+}
+
+h1{
+    font-size: 36px;
+    color: #dbedff;
+}
+
+div{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px;
+    margin-bottom: 20px;
+}
+
+
+button{
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: #486783;
+    background-color: #dbf2ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

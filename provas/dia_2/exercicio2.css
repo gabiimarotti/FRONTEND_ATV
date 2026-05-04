@@ -1,0 +1,22 @@
+body{
+    font-family: Verdana;
+    background-color: #518aab;
+}
+
+h1, h2{
+    text-align: center;
+    margin: 20px;
+}
+
+h1{
+    font-size: 36px;
+    color: #dbedff;
+}
+
+div{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px;
+    margin-bottom: 20px;
+}

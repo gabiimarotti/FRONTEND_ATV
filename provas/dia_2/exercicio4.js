@@ -1,6 +1,9 @@
+let acionar=0;
+
 function add() {
     const container = document.getElementById('Cards').parentNode;
 
+    if (acionar === 0) {
     const novoCardHTML = `
         <div class="card ms-4" style="width: 22rem;">
             <img src="Lucas_Paqueta.png" class="card-img-top" alt="Lucas Paquetá">
@@ -17,6 +20,11 @@ function add() {
             </div>
         </div>
     `;
-
+      
     container.insertAdjacentHTML('beforeend', novoCardHTML);
+    acionar = 1;
+
+    }
+  
+
 }

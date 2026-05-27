@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Técnico: React Local (Sem Build Tools)</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --surface-color: #161b22;
+            --text-color: #c9d1d9;
+            --text-title: #f0f6fc;
+            --primary-color: #58a6ff;
+            --accent-color: #ff7b72;
+            --border-color: #30363d;
+            --code-bg: #010409;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 { color: var(--text-title); font-size: 2.5rem; margin-bottom: 10px; }
+        h2 { color: var(--primary-color); font-size: 1.5rem; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;}
+        h3 { color: var(--text-title); font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; }
+        
+        p { margin-bottom: 15px; }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 0.9rem;
+            color: #e6edf3;
+        }
+
+        .inline-code {
+            background-color: rgba(110, 118, 129, 0.4);
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
+            font-size: 0.85em;
+        }
+
+        .keyword { color: #ff7b72; }
+        .string { color: #a5d6ff; }
+        .function { color: #d2a8ff; }
+        .comment { color: #8b949e; }
+        .tag { color: #7ee787; }
+
+        .note-box {
+            background-color: rgba(88, 166, 255, 0.1);
+            border-left: 3px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Guia de Implementação: React Local (Contexto Clone)</h1>
+            <p>Este guia detalha a arquitetura e os snippets principais para implementar um clone do jogo Contexto utilizando React diretamente no navegador via CDNs, dispensando o uso de Node.js ou bundlers como Vite/Webpack.</p>
+        </header>
+
+        <section>
+            <h2>1. Setup do Ambiente e CDNs (index.html)</h2>
+            <p>Para rodar React nativamente no navegador, é necessário importar as bibliotecas do React (Core e DOM) e o Babel. O Babel transpilará o JSX para JavaScript puro (ES5) em tempo real de execução (runtime).</p>
+            
+            <p>No <code>&lt;head&gt;</code> do seu arquivo HTML, adicione as seguintes tags de script:</p>
+            <pre><code><span class="comment">&lt;!-- Bibliotecas base do React --&gt;</span>
+&lt;<span class="tag">script</span> src=<span class="string">"https://unpkg.com/react@18/umd/react.production.min.js"</span> crossorigin&gt;&lt;/<span class="tag">script</span>&gt;
+&lt;<span class="tag">script</span> src=<span class="string">"https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"</span> crossorigin&gt;&lt;/<span class="tag">script</span>&gt;
+
+<span class="comment">&lt;!-- Transpilador Babel Standalone --&gt;</span>
+&lt;<span class="tag">script</span> src=<span class="string">"https://unpkg.com/@babel/standalone/babel.min.js"</span>&gt;&lt;/<span class="tag">script</span>&gt;</code></pre>
+
+            <div class="note-box">
+                <strong>Importante:</strong> Ao carregar seu script local contendo JSX, você deve especificar o atributo <span class="inline-code">type="text/babel"</span> na tag de importação (ex: <span class="inline-code">&lt;script type="text/babel" src="app.js"&gt;&lt;/script&gt;</span>).
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Gerenciamento de Estado (useState)</h2>
+            <p>Como não estamos utilizando um sistema de módulos (ES Modules com <code>import</code>/<code>export</code>), os hooks do React são extraídos diretamente do objeto global <code>React</code>.</p>
+            <p>O estado (<span class="inline-code">state</span>) é responsável por engatilhar re-renderizações na interface quando mutado.</p>
+            
+            <pre><code><span class="comment">// Desestruturação do hook useState a partir do objeto global do React</span>
+<span class="keyword">const</span> { useState } = React;
+
+<span class="keyword">function</span> <span class="function">App</span>() {
+    <span class="comment">// input state: controla o two-way data binding do campo de texto</span>
+    <span class="keyword">const</span> [inputValue, setInputValue] = <span class="function">useState</span>(<span class="string">""</span>);
+    
+    <span class="comment">// Array de objetos armazenando as tentativas ({ word: string, rank: number })</span>
+    <span class="keyword">const</span> [guesses, setGuesses] = <span class="function">useState</span>([]);
+    
+    <span class="comment">// ... resto do componente</span>
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>3. Lógica de Submissão e Ordenação (app.js)</h2>
+            <p>A função manipuladora do formulário é responsável por interceptar o submit, sanitizar o input, buscar o índice da palavra na array do dicionário (distância semântica) e atualizar o estado de forma imutável.</p>
+            
+            <pre><code><span class="keyword">const</span> <span class="function">handleSubmit</span> = (e) =&gt; {
+    <span class="comment">// Previne o reload da página</span>
+    e.<span class="function">preventDefault</span>();
+    
+    <span class="keyword">const</span> currentGuess = inputValue.<span class="function">trim</span>().<span class="function">toLowerCase</span>();
+    <span class="keyword">if</span> (!currentGuess) <span class="keyword">return</span>;
+
+    <span class="comment">// dictionaryArray é a sua variável global carregada via palavras.js</span>
+    <span class="comment">// indexOf retorna o índice da palavra (0 é a resposta correta). Retorna -1 se não existir.</span>
+    <span class="keyword">const</span> index = dictionaryArray.<span class="function">indexOf</span>(currentGuess);
+    
+    <span class="keyword">if</span> (index === -1) {
+        <span class="comment">// Implemente sua lógica de erro aqui</span>
+        <span class="keyword">return</span>;
+    }
+
+    <span class="comment">// O rank real (posição) é o index + 1</span>
+    <span class="keyword">const</span> rank = index + 1;
+
+    <span class="comment">// Atualização de estado baseada no estado anterior (Functional State Update)</span>
+    <span class="function">setGuesses</span>(prevGuesses =&gt; {
+        <span class="keyword">const</span> newGuesses = [...prevGuesses, { word: currentGuess, rank }];
+        <span class="comment">// Ordena os objetos in-place priorizando o menor rank</span>
+        <span class="keyword">return</span> newGuesses.<span class="function">sort</span>((a, b) =&gt; a.rank - b.rank);
+    });
+
+    <span class="function">setInputValue</span>(<span class="string">""</span>);
+};</code></pre>
+        </section>
+
+        <section>
+            <h2>4. Renderização do JSX e Estilização Dinâmica</h2>
+            <p>No React, a iteração de arrays para renderização de elementos no DOM é feita utilizando o método <span class="inline-code">.map()</span> nativo do JavaScript.</p>
+            <p>Para aplicar propriedades de CSS dinamicamente com base nos dados (como a largura da barra de proximidade), utiliza-se o atributo <span class="inline-code">style</span> passando um objeto JavaScript.</p>
+            
+            <pre><code><span class="keyword">return</span> (
+    &lt;<span class="tag">div</span> className=<span class="string">"game-container"</span>&gt;
+        <span class="comment">{/* Binding do manipulador ao formulário */}</span>
+        &lt;<span class="tag">form</span> onSubmit={handleSubmit}&gt;
+            &lt;<span class="tag">input</span> 
+                value={inputValue} 
+                onChange={(e) =&gt; <span class="function">setInputValue</span>(e.target.value)} 
+            /&gt;
+            &lt;<span class="tag">button</span> type=<span class="string">"submit"</span>&gt;Tentar&lt;/<span class="tag">button</span>&gt;
+        &lt;/<span class="tag">form</span>&gt;
+
+        &lt;<span class="tag">div</span> className=<span class="string">"guesses-list"</span>&gt;
+            {guesses.<span class="function">map</span>((guess) =&gt; {
+                <span class="comment">// Lógica percentual baseada no rank (1 = 100%)</span>
+                <span class="keyword">const</span> percent = <span class="function">calculatePercentage</span>(guess.rank);
+                
+                <span class="keyword">return</span> (
+                    &lt;<span class="tag">div</span> key={guess.word} style={{
+                        background: `<span class="string">linear-gradient(90deg, #2ea043 ${percent}%, transparent ${percent}%)</span>`
+                    }}&gt;
+                        &lt;<span class="tag">span</span>&gt;{guess.word}&lt;/<span class="tag">span</span>&gt;
+                        &lt;<span class="tag">span</span>&gt;Posição: {guess.rank}&lt;/<span class="tag">span</span>&gt;
+                    &lt;/<span class="tag">div</span>&gt;
+                );
+            })}
+        &lt;/<span class="tag">div</span>&gt;
+    &lt;/<span class="tag">div</span>&gt;
+);</code></pre>
+            <div class="note-box">
+                <strong>Boas Práticas:</strong> Note o uso do atributo <span class="inline-code">key</span> dentro do método map. O React utiliza essa chave (que deve ser única para cada elemento irmão) para rastrear o ciclo de vida do elemento no Virtual DOM e otimizar re-renderizações.
+            </div>
+        </section>
+
+        <section>
+            <h2>5. Renderizando na Raiz (Mounting)</h2>
+            <p>Após definir o componente principal (<span class="inline-code">App</span>), é necessário atrelá-lo ao DOM real do navegador, renderizando-o na <code>&lt;div id="root"&gt;</code> do seu HTML.</p>
+            <pre><code><span class="comment">// Cria a raiz do React no elemento do DOM</span>
+<span class="keyword">const</span> root = ReactDOM.<span class="function">createRoot</span>(document.<span class="function">getElementById</span>(<span class="string">'root'</span>));
+
+<span class="comment">// Renderiza o componente na raiz</span>
+root.<span class="function">render</span>(&lt;<span class="tag">App</span> /&gt;);</code></pre>
+        </section>
+
+    </div>
+</body>
+</html>
